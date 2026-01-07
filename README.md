@@ -1,28 +1,28 @@
 # 🎥 YouTube Video Summarizer
 
-An AI-powered application that generates comprehensive summaries of YouTube videos using LangChain and OpenAI's GPT models. Perfect for quickly understanding long videos without watching them entirely.
+An AI-powered application that generates comprehensive summaries of YouTube videos using LangChain and Google Gemini. Perfect for quickly understanding long videos without watching them entirely.
 
 ## ✨ Features
 
-- **Smart Summarization**: Uses OpenAI's GPT models (gpt-4o-mini, gpt-3.5-turbo, or gpt-4o)
+- **Smart Summarization**: Uses Google Gemini models (gemini-1.5-flash, gemini-1.5-pro, or gemini-pro)
 - **Handles Long Videos**: Map-Reduce strategy automatically handles videos over 20 minutes
 - **Automatic Transcript Extraction**: Fetches video transcripts automatically
 - **User-Friendly Interface**: Built with Streamlit for an intuitive experience
 - **Error Handling**: Gracefully handles missing transcripts and API errors
-- **Multiple Model Options**: Choose between different OpenAI models based on your needs
+- **Multiple Model Options**: Choose between different Gemini models based on your needs
 
 ## 🛠️ Tech Stack
 
 - **Language**: Python 3.9+
 - **Framework**: LangChain (latest version)
 - **Frontend**: Streamlit
-- **LLM**: OpenAI (gpt-4o-mini, gpt-3.5-turbo, or gpt-4o)
+- **LLM**: Google Gemini (gemini-1.5-flash, gemini-1.5-pro, or gemini-pro)
 - **Transcript Loader**: YoutubeLoader from langchain_community
 
 ## 📋 Prerequisites
 
 - Python 3.9 or higher
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
 
 ## 🚀 Installation
 
@@ -53,8 +53,8 @@ An AI-powered application that generates comprehensive summaries of YouTube vide
    # Copy the example file
    cp .env.example .env
 
-   # Edit .env and add your OpenAI API key
-   # OPENAI_API_KEY=your_api_key_here
+   # Edit .env and add your Google Gemini API key
+   # GOOGLE_API_KEY=your_api_key_here
    ```
 
 ## 🎯 Usage
@@ -124,17 +124,17 @@ Map (Summarize Chunks) → Reduce (Combine Summaries) → Final Summary
 
 ### Model Selection
 
-You can choose between different OpenAI models in the sidebar:
+You can choose between different Google Gemini models in the sidebar:
 
-- **gpt-4o-mini** (Recommended): Fast and cost-effective
-- **gpt-3.5-turbo**: Balanced performance
-- **gpt-4o**: Most capable but slower and more expensive
+- **gemini-1.5-flash** (Recommended): Fast and cost-effective
+- **gemini-1.5-pro**: Most capable with advanced reasoning
+- **gemini-pro**: Balanced performance
 
 ### Environment Variables
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
+| `GOOGLE_API_KEY` | Your Google Gemini API key | Yes |
 
 ## ❌ Error Handling
 
@@ -148,14 +148,14 @@ The application handles various error scenarios:
 ## 🔒 Security Notes
 
 - Never commit your `.env` file to version control
-- Keep your OpenAI API key secure
+- Keep your Google Gemini API key secure
 - The `.env` file is included in `.gitignore`
 
 ## 💡 Tips
 
 1. **For best results**: Use videos with clear, well-structured content
 2. **Long videos**: May take 1-2 minutes to process
-3. **API costs**: gpt-4o-mini is the most cost-effective option
+3. **API costs**: gemini-1.5-flash is the most cost-effective option
 4. **No transcript**: The video must have subtitles/captions available
 
 ## 🐛 Troubleshooting
@@ -164,13 +164,13 @@ The application handles various error scenarios:
 - The video needs to have captions enabled
 - Try enabling auto-generated captions in YouTube settings
 
-### "OpenAI API key is missing or invalid"
-- Check that your `.env` file exists and contains `OPENAI_API_KEY`
+### "Google API key is missing or invalid"
+- Check that your `.env` file exists and contains `GOOGLE_API_KEY`
 - Verify your API key is correct
 
 ### "Rate limit exceeded"
 - Wait a few minutes and try again
-- Consider upgrading your OpenAI API plan
+- Google Gemini has generous free tier limits
 
 ## 📦 Dependencies
 
@@ -178,8 +178,8 @@ See `requirements.txt` for the full list of dependencies:
 - streamlit
 - langchain
 - langchain-community
-- langchain-openai
-- openai
+- langchain-google-genai
+- google-generativeai
 - youtube-transcript-api
 - pytube
 - python-dotenv
@@ -196,7 +196,7 @@ This project is open source and available under the MIT License.
 ## 🙏 Acknowledgments
 
 - Built with [LangChain](https://github.com/langchain-ai/langchain)
-- Powered by [OpenAI](https://openai.com/)
+- Powered by [Google Gemini](https://ai.google.dev/)
 - UI created with [Streamlit](https://streamlit.io/)
 
 ---

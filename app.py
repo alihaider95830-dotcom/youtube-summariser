@@ -71,10 +71,10 @@ def main():
     )
 
     # Check if API key is configured
-    if not os.getenv("OPENAI_API_KEY"):
+    if not os.getenv("GOOGLE_API_KEY"):
         st.markdown(
-            '<div class="error-box">⚠️ <strong>OpenAI API Key not found!</strong><br>'
-            'Please create a <code>.env</code> file with your <code>OPENAI_API_KEY</code>.</div>',
+            '<div class="error-box">⚠️ <strong>Google API Key not found!</strong><br>'
+            'Please create a <code>.env</code> file with your <code>GOOGLE_API_KEY</code>.</div>',
             unsafe_allow_html=True
         )
         st.stop()
@@ -85,10 +85,10 @@ def main():
 
         # Model selection
         model_choice = st.selectbox(
-            "Select OpenAI Model",
-            options=["gpt-4o-mini", "gpt-3.5-turbo", "gpt-4o"],
+            "Select Gemini Model",
+            options=["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"],
             index=0,
-            help="Choose the AI model for summarization. gpt-4o-mini is faster and cheaper."
+            help="Choose the AI model for summarization. gemini-1.5-flash is faster and cheaper."
         )
 
         st.markdown("---")
@@ -205,7 +205,7 @@ def main():
     st.markdown("---")
     st.markdown(
         '<p style="text-align: center; color: #888; font-size: 0.9rem;">'
-        'Powered by LangChain 🦜 & OpenAI 🤖 | Built with Streamlit ⚡'
+        'Powered by LangChain 🦜 & Google Gemini 🤖 | Built with Streamlit ⚡'
         '</p>',
         unsafe_allow_html=True
     )
