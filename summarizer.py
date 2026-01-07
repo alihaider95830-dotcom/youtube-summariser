@@ -183,7 +183,15 @@ def summarize_video(
         )
 
         # Run the chain to generate the summary
-        summary = chain.run(split_docs)
+        # Try new API first (invoke), fallback to old API (run) if needed
+        try:
+            # New LangChain API (v0.1.0+)
+            result = chain.invoke({"input_documents": split_docs})
+            # Extract the summary from the result
+            summary = result.get("output_text", result) if isinstance(result, dict) else result
+        except (AttributeError, TypeError):
+            # Fallback to old LangChain API
+            summary = chain.run(split_docs)
 
         return summary, None
 
