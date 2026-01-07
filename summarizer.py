@@ -7,7 +7,7 @@ import os
 import re
 from typing import Tuple, Optional
 from langchain_community.document_loaders import YoutubeLoader
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.summarize import load_summarize_chain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.prompts import PromptTemplate
@@ -86,7 +86,7 @@ def extract_transcript(youtube_url: str) -> Tuple[Optional[list], Optional[str]]
 
 def summarize_video(
     documents: list,
-    model_name: str = "gpt-4o-mini",
+    model_name: str = "gemini-1.5-flash",
     temperature: float = 0.3
 ) -> Tuple[Optional[str], Optional[str]]:
     """
@@ -113,18 +113,18 @@ def summarize_video(
 
     Args:
         documents (list): List of document objects containing the transcript
-        model_name (str): OpenAI model to use (default: gpt-4o-mini)
+        model_name (str): Google Gemini model to use (default: gemini-1.5-flash)
         temperature (float): Model temperature for creativity (default: 0.3)
 
     Returns:
         Tuple[Optional[str], Optional[str]]: (summary, error_message)
     """
     try:
-        # Initialize the OpenAI model
-        llm = ChatOpenAI(
-            model_name=model_name,
+        # Initialize the Google Gemini model
+        llm = ChatGoogleGenerativeAI(
+            model=model_name,
             temperature=temperature,
-            openai_api_key=os.getenv("OPENAI_API_KEY")
+            google_api_key=os.getenv("GOOGLE_API_KEY")
         )
 
         # Text splitter to chunk the transcript into manageable pieces
@@ -200,25 +200,25 @@ def summarize_video(
 
         # Handle specific error cases
         if "api_key" in error_msg.lower() or "authentication" in error_msg.lower():
-            return None, "OpenAI API key is missing or invalid. Please check your .env file."
+            return None, "Google API key is missing or invalid. Please check your .env file."
         elif "rate limit" in error_msg.lower():
-            return None, "OpenAI API rate limit exceeded. Please try again later."
+            return None, "Google API rate limit exceeded. Please try again later."
         elif "quota" in error_msg.lower():
-            return None, "OpenAI API quota exceeded. Please check your account."
+            return None, "Google API quota exceeded. Please check your account."
         else:
             return None, f"Error during summarization: {error_msg}"
 
 
 def process_youtube_video(
     youtube_url: str,
-    model_name: str = "gpt-4o-mini"
+    model_name: str = "gemini-1.5-flash"
 ) -> Tuple[Optional[str], Optional[str]]:
     """
     Main function to process a YouTube video: validate, extract transcript, and summarize.
 
     Args:
         youtube_url (str): The YouTube video URL
-        model_name (str): OpenAI model to use
+        model_name (str): Google Gemini model to use
 
     Returns:
         Tuple[Optional[str], Optional[str]]: (summary, error_message)
